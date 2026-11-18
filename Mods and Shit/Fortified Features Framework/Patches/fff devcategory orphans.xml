@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!--
+        The patch in "fortified features framework patch.xml" removes the FFF_DevCategory
+        DesignationCategoryDef. Defs that still reference it (DMS AncientCorps base building
+        DMSAC_BaseBuilding, FFF alert/facility/wall structures) then log
+        "No DesignationCategoryDef named FFF_DevCategory found".
+        These defs are dev/mapgen only, so we drop the dangling reference.
+        Same end result as before (no menu entry), without the errors.
+        Only matches defs still pointing at FFF_DevCategory: the ones re-categorised
+        by the other patch (Ferny_Doors / Ferny_Walls) are left alone, whatever the order.
+    -->
+    <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>Defs/ThingDef[designationCategory="FFF_DevCategory"]/designationCategory</xpath>
+    </Operation>
+</Patch>
